@@ -54,7 +54,7 @@ return res.status(201).json({
     success: true,
     message: 'User registered successfully',
     data: {
-        id: user._id,
+        id: user_id,
         name: user.name,
         email: user.email,
         role: user.role
@@ -101,7 +101,7 @@ const user = await User.findOne({ email }).select('+password');
 
     const token = jwt.sign(
     {
-        id: user._id,
+        id: user_id,
         role: user.role
     },
     process.env.JWT_SECRET,
@@ -114,7 +114,7 @@ const user = await User.findOne({ email }).select('+password');
     message: 'Login successful',
     token,
     data: {
-        id: user._id,
+        id: user_id,
         name: user.name,
         email: user.email,
         role: user.role

@@ -1,4 +1,4 @@
-const Attendance = require('../models/Attendance');
+const Attendance = require('../models/attendance');
 
 // ----------------------------------
 // Check In
@@ -6,7 +6,7 @@ const Attendance = require('../models/Attendance');
 
 const checkIn = async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user_id;
 
         // Start of today (00:00:00)
         const today = new Date();
@@ -52,7 +52,7 @@ const checkIn = async (req, res) => {
 
 const checkOut = async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user_id;
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -110,7 +110,7 @@ const checkOut = async (req, res) => {
 const getMyAttendance = async (req, res) => {
     try {
         const attendance = await Attendance
-            .find({ user: req.user._id })
+            .find({ user: req.user_id })
             .sort({ date: -1 });
 
         return res.status(200).json({

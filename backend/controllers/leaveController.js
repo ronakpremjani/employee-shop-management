@@ -1,4 +1,4 @@
-const Attendance = require('../models/Attendance');
+const Attendance = require('../models/attendance');
 const LeaveManagement = require('../models/LeaveManagement');
 
 const leaveRequest = async (req, res) => {
@@ -28,7 +28,7 @@ const leaveRequest = async (req, res) => {
         }
 
         const existingLeave = await LeaveManagement.findOne({
-        user: req.user._id,
+        user: req.user_id,
         status: { $in: ['Pending', 'Approved'] },
 
         $or: [
@@ -47,7 +47,7 @@ const leaveRequest = async (req, res) => {
 }
 
         const leave = await LeaveManagement.create({
-            user: req.user._id,
+            user: req.user_id,
             dateFrom: start,
             dateTo: end,
             reason,
@@ -72,7 +72,7 @@ const leaveRequest = async (req, res) => {
 
 const getLeaveRequests = async (req, res) => {
     try {
-        const leaveRequests = await LeaveManagement.find({ user: req.user._id }).sort({ startDate: -1 });
+        const leaveRequests = await LeaveManagement.find({ user: req.user_id }).sort({ startDate: -1 });
 
         return res.status(200).json({
             success: true,
@@ -120,7 +120,7 @@ const updateLeaveRequestStatus = async (req, res) => {
 
         // Update leave
         leaveRequest.status = status;
-        leaveRequest.approvedBy = req.user._id;
+        leaveRequest.approvedBy = req.user_id;
 
         await leaveRequest.save();
 
