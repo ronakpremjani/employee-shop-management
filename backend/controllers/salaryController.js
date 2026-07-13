@@ -119,18 +119,73 @@ const generateSalary = async (req, res) => {
                     leaveDays++;
                 }
             }
-        });
 
-        return res.status(200).json({
-            success: true,
-            message: 'Validation successful. Ready to generate salary.',
-            data: {
-                workingDays,
-                presentDays: updatedPresentDays,
-                absentDays: finalAbsentDays,
-                leaveDays
+            const advanceRecords = await AdvanceSalary.find({
+                user: user_id,
+                status: 'Approved',
+                deductionStatus: 'Pending',
+                deductedMonth: salaryMonth,
+                deductedYear: salaryYear
+            });
+
+            if (advanceRecords.length > 0) {
+                const advanceDeduction = advanceRecords.reduce(
+                    (total, advance) => total + advance.amount,
+                    0
+                );
+
+                return res.status(200).json({
+                    success: true,
+                    message: 'Validation successful. Ready to generate salary.',
+                    data: {
+                        workingDays,
+                        presentDays: updatedPresentDays,
+                        absentDays: finalAbsentDays,
+                        leaveDays,
+                        totalAdvanceDeduction: advanceDeduction,
+                        netSalary
+                    }
+                }); 
+
             }
-        });
+            });
+
+            const advanceDeduction = advanceRecords.reduce(
+            (total, advance) => total + advance.amount,
+            0
+            );
+
+            const purchaseDeduction = await ItemPurchase.aggregate([
+                {
+                    $match: {
+                        
+                            user: user._id,
+                            paymentMethod: 'Salary',
+                            status: 'Pending'
+                    }
+                },
+                {
+                    $group: {
+                        _id: null,
+                        totalAmount: { $sum: '$amount' }
+                    }
+                }
+            ]);
+
+            const itemPurchaseDeduction = purchaseDeduction.length > 0 ? purchaseDeduction[0].totalAmount : 0;
+
+            return res.status(200).json({
+                success: true,
+                message: 'Validation successful. Ready to generate salary.',
+                data: {
+                    workingDays,
+                    presentDays: updatedPresentDays,
+                    absentDays: finalAbsentDays,
+                    leaveDays,
+                    totalAdvanceDeduction: advanceDeduction,
+                    netSalary
+                }
+            }); 
 
     } catch (error) {
         return res.status(500).json({
