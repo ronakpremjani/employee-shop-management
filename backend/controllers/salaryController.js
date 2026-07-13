@@ -99,21 +99,9 @@ const generateSalary = async (req, res) => {
             dateTo: { $gte: startDate }
         });
 
-        leaveRecords.forEach((leave) => {
-            const leaveStart = new Date(Math.max(leave.dateFrom, startDate));
-            const leaveEnd = new Date(Math.min(leave.dateTo, endDate));
-
-            for (
-                let d = new Date(leaveStart);
-                d <= leaveEnd;
-                d.setDate(d.getDate() + 1)
-            ) {
-                const dateKey = getDateKey(d);
-            }
-        });
-
+        const finalAbsentDays = absentDays - leaveRecords.length;
         const updatedPresentDays = presentDates.size;
-        const updatedAbsentDays = workingDays - updatedPresentDays;
+        const updatedAbsentDays = workingDays - presentDates;
 
         let leaveDays = 0;
 
@@ -139,7 +127,7 @@ const generateSalary = async (req, res) => {
             data: {
                 workingDays,
                 presentDays: updatedPresentDays,
-                absentDays: updatedAbsentDays,
+                absentDays: finalAbsentDays,
                 leaveDays
             }
         });
