@@ -58,11 +58,6 @@ const salarySchema = new mongoose.Schema(
         default: 0
     },
 
-    bonus: {
-        type: Number,
-        default: 0
-    },
-
     netSalary: {
         type: Number,
         required: true

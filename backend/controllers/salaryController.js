@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const Attendance = require('../models/attendance');
 const Salary = require('../models/employeeTransaction/Salary');
+const LeaveManagement = require('../models/LeaveManagement');
+const AdvanceSalary = require('../models/employeeTransaction/AdvanceSalary');
 
 const getDateKey = (date) => {
     const value = new Date(date);
@@ -90,14 +92,55 @@ const generateSalary = async (req, res) => {
 
         const presentDays = presentDates.size;
         const absentDays = workingDays - presentDays;
+        const leaveRecords = await LeaveManagement.find({
+            user: user_id,
+            status: 'Approved',
+            dateFrom: { $lte: endDate },
+            dateTo: { $gte: startDate }
+        });
+
+        leaveRecords.forEach((leave) => {
+            const leaveStart = new Date(Math.max(leave.dateFrom, startDate));
+            const leaveEnd = new Date(Math.min(leave.dateTo, endDate));
+
+            for (
+                let d = new Date(leaveStart);
+                d <= leaveEnd;
+                d.setDate(d.getDate() + 1)
+            ) {
+                const dateKey = getDateKey(d);
+            }
+        });
+
+        const updatedPresentDays = presentDates.size;
+        const updatedAbsentDays = workingDays - updatedPresentDays;
+
+        let leaveDays = 0;
+
+        leaveRecords.forEach((leave) => {
+            const leaveStart = new Date(Math.max(leave.dateFrom, startDate));
+            const leaveEnd = new Date(Math.min(leave.dateTo, endDate));
+
+            for (
+                let d = new Date(leaveStart);
+                d <= leaveEnd;
+                d.setDate(d.getDate() + 1)
+            ) {
+                const dateKey = getDateKey(d);
+                if (!presentDates.has(dateKey)) {
+                    leaveDays++;
+                }
+            }
+        });
 
         return res.status(200).json({
             success: true,
             message: 'Validation successful. Ready to generate salary.',
             data: {
                 workingDays,
-                presentDays,
-                absentDays
+                presentDays: updatedPresentDays,
+                absentDays: updatedAbsentDays,
+                leaveDays
             }
         });
 
