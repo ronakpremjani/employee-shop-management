@@ -12,7 +12,7 @@ const { protect } = require('../middleware/authMiddleware');
 const { adminOnly } = require('../middleware/adminMiddleware');
 
 router.post('/', protect, leaveRequest);
-router.get('/', protect, adminOnly, getLeaveRequests);
+router.get('/', protect, getLeaveRequests);
 router.put('/:id/status', protect, adminOnly, updateLeaveRequestStatus);    
 
 module.exports = router;

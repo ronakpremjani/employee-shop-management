@@ -21,6 +21,9 @@ const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const salaryRoutes = require('./routes/salaryRoutes');
+const leaveRoutes = require('./routes/leaveRoutes');
+const advanceSalaryRoutes = require('./routes/advanceSalaryRoutes');
+const itemPurchaseRoutes = require('./routes/itemPurchaseRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +32,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/staff', adminRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/salary', salaryRoutes);
+app.use('/api/leave', leaveRoutes);
+app.use('/api/advance-salary', advanceSalaryRoutes);
+app.use('/api/purchase', itemPurchaseRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running...');

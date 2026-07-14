@@ -49,7 +49,7 @@ return res.status(201).json({
     success: true,
     message: 'staff created successfully',
     data: {
-        id: user_id,
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role

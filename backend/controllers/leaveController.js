@@ -5,11 +5,21 @@ const leaveRequest = async (req, res) => {
     try {
         const { startDate, endDate, reason } = req.body;
 
+        if (!startDate || !endDate || !reason) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required'
+            });
+        }
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
         const start = new Date(startDate);
         start.setHours(0, 0, 0, 0);
+
+        const end = new Date(endDate);
+        end.setHours(23, 59, 59, 999);
 
         if (start < today) {
             return res.status(400).json({
@@ -18,40 +28,37 @@ const leaveRequest = async (req, res) => {
             });
         }
 
-        if (!startDate || !endDate || !reason) {
-
+        if (end < start) {
             return res.status(400).json({
                 success: false,
-                message: 'All fields are required'
+                message: 'End date cannot be before start date.'
             });
-
         }
 
         const existingLeave = await LeaveManagement.findOne({
-        user: req.user_id,
-        status: { $in: ['Pending', 'Approved'] },
-
-        $or: [
-            {
-                startDate: { $lte: end },
-                endDate: { $gte: start }
-            }
+            user: req.user_id,
+            status: { $in: ['Pending', 'Approved'] },
+            $or: [
+                {
+                    dateFrom: { $lte: end },
+                    dateTo: { $gte: start }
+                }
             ]
-});
+        });
 
         if (existingLeave) {
             return res.status(409).json({
                 success: false,
                 message: 'You already have a leave request for these dates.'
             });
-}
+        }
 
         const leave = await LeaveManagement.create({
             user: req.user_id,
             dateFrom: start,
             dateTo: end,
             reason,
-            status: 'pending',
+            status: 'Pending',
             approvedBy: null
         });
 
@@ -72,7 +79,13 @@ const leaveRequest = async (req, res) => {
 
 const getLeaveRequests = async (req, res) => {
     try {
-        const leaveRequests = await LeaveManagement.find({ user: req.user_id }).sort({ startDate: -1 });
+        let query = {};
+        if (req.user.role !== 'admin') {
+            query = { user: req.user_id };
+        }
+        const leaveRequests = await LeaveManagement.find(query)
+            .populate('user', 'name email role')
+            .sort({ createdAt: -1 });
 
         return res.status(200).json({
             success: true,

@@ -247,7 +247,41 @@ return res.status(201).json({
     }
 };
 
+const getAllSalaries = async (req, res) => {
+    try {
+        const salaries = await Salary.find()
+            .populate('user', 'name email phone role')
+            .sort({ createdAt: -1 });
+        return res.status(200).json({
+            success: true,
+            data: salaries
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const getMySalaries = async (req, res) => {
+    try {
+        const salaries = await Salary.find({ user: req.user_id })
+            .sort({ createdAt: -1 });
+        return res.status(200).json({
+            success: true,
+            data: salaries
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
 
 module.exports = {
-    generateSalary
+    generateSalary,
+    getAllSalaries,
+    getMySalaries
 };
