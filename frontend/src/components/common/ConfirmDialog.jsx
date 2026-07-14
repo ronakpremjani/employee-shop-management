@@ -17,15 +17,15 @@ const ConfirmDialog = ({
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose} title={title} size="sm">
-      <div className="space-y-4">
-        <p className="text-gray-300 text-sm leading-relaxed">{message}</p>
+      <div className="space-y-4 font-sans">
+        <p className="text-zinc-400 text-xs leading-relaxed">{message}</p>
         
-        <div className="flex items-center justify-end space-x-3 pt-4">
+        <div className="flex items-center justify-end space-x-2.5 pt-2">
           <button
             type="button"
             onClick={onClose}
             disabled={isLoading}
-            className="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 hover:text-white transition-all disabled:opacity-50"
+            className="px-3.5 py-2 text-xs font-semibold text-zinc-400 bg-zinc-900 border border-zinc-800 rounded-lg hover:bg-zinc-800 hover:text-white transition-all disabled:opacity-50 cursor-pointer"
           >
             {cancelText}
           </button>
@@ -33,10 +33,10 @@ const ConfirmDialog = ({
             type="button"
             onClick={onConfirm}
             disabled={isLoading}
-            className={`flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-xl transition-all shadow-lg ${
+            className={`flex items-center justify-center px-3.5 py-2 text-xs font-semibold rounded-lg transition-all shadow-sm cursor-pointer ${
               isDanger
-                ? 'bg-rose-600 hover:bg-rose-500 text-white shadow-rose-900/20'
-                : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-900/20'
+                ? 'bg-rose-600 hover:bg-rose-500 text-white'
+                : 'bg-blue-600 hover:bg-blue-500 text-white'
             } disabled:opacity-50`}
           >
             {isLoading ? <Spinner size="sm" className="mr-2" /> : null}

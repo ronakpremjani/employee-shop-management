@@ -38,48 +38,48 @@ const Sidebar = ({ isOpen, onClose, role = 'staff', onLogout }) => {
   const links = role === 'admin' ? adminLinks : staffLinks;
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-[#0b0f19]/90 border-r border-white/5 backdrop-blur-md">
-      {/* Brand */}
-      <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
-        <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
+    <div className="flex flex-col h-full bg-zinc-950 border-r border-zinc-900/60 font-sans">
+      {/* Brand Header */}
+      <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-900/60">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/10">
             ES
           </div>
-          <span className="text-lg font-bold tracking-wider text-white bg-clip-text">
+          <span className="text-base font-bold tracking-tight text-white">
             ShopManager
           </span>
         </div>
         {onClose && (
           <button
             onClick={onClose}
-            className="md:hidden text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/5"
+            className="md:hidden text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-900 transition-colors"
             aria-label="Close sidebar"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         )}
       </div>
 
       {/* Nav Links */}
-      <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+      <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
         {links.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
             onClick={() => onClose && onClose()}
             className={({ isActive }) =>
-              `flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200 group ${
+              `flex items-center px-3.5 py-2.5 text-xs font-semibold rounded-lg transition-all duration-150 group border border-transparent ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/15'
-                  : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/5'
+                  ? 'bg-zinc-900 text-white border-zinc-800 shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/40'
               }`
             }
           >
             {({ isActive }) => (
               <>
                 <link.icon
-                  className={`w-5 h-5 mr-3 transition-colors ${
-                    isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                  className={`w-4 h-4 mr-3 transition-colors ${
+                    isActive ? 'text-blue-500' : 'text-zinc-500 group-hover:text-zinc-300'
                   }`}
                 />
                 {link.label}
@@ -90,12 +90,12 @@ const Sidebar = ({ isOpen, onClose, role = 'staff', onLogout }) => {
       </nav>
 
       {/* Footer / Logout */}
-      <div className="p-4 border-t border-white/5">
+      <div className="p-3 border-t border-zinc-900/60">
         <button
           onClick={onLogout}
-          className="flex items-center w-full px-4 py-3 text-sm font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-500/5 border border-transparent hover:border-rose-500/10 rounded-xl transition-all duration-200"
+          className="flex items-center w-full px-3.5 py-2.5 text-xs font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-500/5 border border-transparent hover:border-rose-500/10 rounded-lg transition-all"
         >
-          <LogOut className="w-5 h-5 mr-3" />
+          <LogOut className="w-4 h-4 mr-3" />
           Logout
         </button>
       </div>
@@ -114,7 +114,7 @@ const Sidebar = ({ isOpen, onClose, role = 'staff', onLogout }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:z-auto ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-60 transform transition-transform duration-200 ease-in-out md:translate-x-0 md:static md:z-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

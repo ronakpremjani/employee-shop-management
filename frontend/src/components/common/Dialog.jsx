@@ -28,33 +28,33 @@ const Dialog = ({ isOpen, onClose, title, children, size = 'md' }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 font-sans">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
       {/* Content Container */}
       <div
-        className={`relative w-full ${sizeClasses[size] || sizeClasses.md} glass rounded-2xl overflow-hidden shadow-2xl border border-white/10 z-10 transform scale-100 transition-all duration-300 animate-fade-in`}
+        className={`relative w-full ${sizeClasses[size] || sizeClasses.md} bg-zinc-950 rounded-lg overflow-hidden shadow-2xl border border-zinc-900 z-10 transform scale-100 transition-all duration-300 animate-fade-in`}
         role="dialog"
         aria-modal="true"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
-          <h3 className="text-lg font-semibold text-white tracking-wide">{title}</h3>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-900/60 bg-zinc-950">
+          <h3 className="text-sm font-semibold text-white tracking-tight">{title}</h3>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white hover:bg-white/5 p-1.5 rounded-lg transition-all"
+            className="text-zinc-400 hover:text-white hover:bg-zinc-900 p-1.5 rounded-lg transition-colors cursor-pointer"
             aria-label="Close dialog"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-6 overflow-y-auto max-h-[75vh]">
+        <div className="p-6 overflow-y-auto max-h-[75vh] bg-zinc-950">
           {children}
         </div>
       </div>

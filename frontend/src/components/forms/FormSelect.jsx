@@ -13,7 +13,7 @@ const FormSelect = React.forwardRef(({
   return (
     <div className={`space-y-1.5 w-full ${className}`}>
       {label && (
-        <label htmlFor={name} className="block text-xs font-semibold text-gray-400 uppercase tracking-wider">
+        <label htmlFor={name} className="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider select-none">
           {label} {required && <span className="text-rose-500">*</span>}
         </label>
       )}
@@ -21,20 +21,20 @@ const FormSelect = React.forwardRef(({
         ref={ref}
         id={name}
         name={name}
-        className={`w-full bg-slate-900 border ${
-          error ? 'border-rose-500/50 focus:border-rose-500' : 'border-white/5 focus:border-blue-500/50'
-        } rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none transition-all shadow-inner cursor-pointer`}
+        className={`w-full bg-zinc-950 border ${
+          error ? 'border-rose-500/50 focus:border-rose-500 focus:ring-rose-500/10' : 'border-zinc-800/80 focus:border-blue-500/60 focus:ring-blue-500/10'
+        } rounded-lg px-3.5 py-2.5 text-xs text-zinc-200 focus:outline-none focus:ring-2 transition-all shadow-sm cursor-pointer`}
         {...props}
       >
-        {placeholder && <option value="">{placeholder}</option>}
+        {placeholder && <option value="" className="bg-zinc-950 text-zinc-500">{placeholder}</option>}
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value} className="bg-slate-900 text-white">
+          <option key={opt.value} value={opt.value} className="bg-zinc-950 text-white">
             {opt.label}
           </option>
         ))}
       </select>
       {error && (
-        <p className="text-xs font-medium text-rose-500 animate-fade-in">{error.message || error}</p>
+        <p className="text-[10px] font-semibold text-rose-500 animate-fade-in">{error.message || error}</p>
       )}
     </div>
   );

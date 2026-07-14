@@ -9,6 +9,7 @@ import StaffLayout from '../layouts/StaffLayout';
 
 // Pages
 import Login from '../pages/auth/Login';
+import Register from '../pages/auth/Register';
 
 // Admin Pages
 import AdminDashboard from '../pages/admin/Dashboard';
@@ -51,6 +52,7 @@ const AppRoutes = () => {
       {/* Public Auth Routes */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Route>
 
       {/* Admin Protected Routes */}
