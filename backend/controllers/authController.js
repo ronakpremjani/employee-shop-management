@@ -54,7 +54,7 @@ return res.status(201).json({
     success: true,
     message: 'User registered successfully',
     data: {
-        id: user_id,
+        user_id: user._id,
         name: user.name,
         email: user.email,
         role: user.role
@@ -101,7 +101,7 @@ const user = await User.findOne({ email }).select('+password');
 
     const token = jwt.sign(
     {
-        id: user_id,
+        user_id: user._id,
         role: user.role
     },
     process.env.JWT_SECRET,
@@ -114,7 +114,7 @@ const user = await User.findOne({ email }).select('+password');
     message: 'Login successful',
     token,
     data: {
-        id: user_id,
+        user_id: user._id,
         name: user.name,
         email: user.email,
         role: user.role
@@ -123,12 +123,15 @@ const user = await User.findOne({ email }).select('+password');
 
 
 }
-catch(error){
- return res.status(500).json({
-      success: false,
-      message: error.message
+catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+        success: false,
+        message: error.message,
+        stack: error.stack
     });
-  }
+}
 }
 
 const getMe = async (req, res) => {

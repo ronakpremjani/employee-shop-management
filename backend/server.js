@@ -20,6 +20,7 @@ connectDB();
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
+const salaryRoutes = require('./routes/salaryRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/staff', adminRoutes);
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/salary', salaryRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running...');

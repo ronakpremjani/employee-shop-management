@@ -134,7 +134,7 @@ const generateSalary = async (req, res) => {
             0
         );
 
-            const itemPurchaseDeduction = await ItemPurchase.aggregate([
+            const purchaseSummary = await ItemPurchase.aggregate([
                 {
                     $match: {
                         
@@ -151,10 +151,10 @@ const generateSalary = async (req, res) => {
                 }
             ]);
 
-            const itemPurchaseDeduction = itemPurchaseDeduction.length > 0 ? itemPurchaseDeduction[0].totalAmount : 0;
+            const itemPurchaseDeduction = purchaseSummary.length > 0 ? purchaseSummary[0].totalAmount : 0;
 
             const basicSalary = user.salary;
-            const perDaySalary = basicSalary / workingDays;
+            const perDaySalary = workingDays > 0 ? basicSalary / workingDays : 0;
             const earnedSalary = perDaySalary * presentDays;
             const netSalary = Math.max(
                         0,
@@ -162,19 +162,6 @@ const generateSalary = async (req, res) => {
                         advanceDeduction -
                         itemPurchaseDeduction
                     );
-
-            return res.status(200).json({
-                success: true,
-                message: 'Salary calculated successfully.',
-                data: {
-                    workingDays,
-                    presentDays,
-                    absentDays: finalAbsentDays,
-                    leaveDays,
-                    totalAdvanceDeduction: advanceDeduction,
-                    netSalary
-                }
-            }); 
 
             // -------------------------
             // Create Salary
@@ -186,7 +173,9 @@ const generateSalary = async (req, res) => {
                 year: salaryYear,
 
                 basicSalary,
-
+                perDaySalary,
+                earnedSalary,
+                
                 workingDays,
                 presentDays,
                 leaveDays,
@@ -202,53 +191,62 @@ const generateSalary = async (req, res) => {
                 generatedBy: req.user._id
             });
 
-            // -------------------------
-            // Return Response
-            // -------------------------
+           // -------------------------
+// Update Advance Salary
+// -------------------------
 
-            return res.status(201).json({
-                success: true,
-                message: 'Salary generated successfully.',
-                data: salary
-            });
+await AdvanceSalary.updateMany(
+    {
+        user: user_id,
+        status: 'Approved',
+        deductionStatus: 'Pending'
+    },
+    {
+        $set: {
+            deductionStatus: 'Deducted',
+            deductedMonth: salaryMonth,
+            deductedYear: salaryYear
+        }
+    }
+);
 
-    } catch (error) {
+// -------------------------
+// Update Item Purchases
+// -------------------------
+
+await ItemPurchase.updateMany(
+    {
+        user: user_id,
+        paymentMethod: 'Salary',
+        status: 'Pending'
+    },
+    {
+        $set: {
+            status: 'Deducted',
+            deductedMonth: salaryMonth,
+            deductedYear: salaryYear
+        }
+    }
+);
+
+// -------------------------
+// Return Response
+// -------------------------
+
+return res.status(201).json({
+    success: true,
+    message: 'Salary generated successfully.',
+    data: salary
+});
+
+    }catch (error) {
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: error.message,            
         });
     }
 };
 
-await AdvanceSalary.updateMany(
-                {
-                    user: user_id,
-                    status: 'Approved',
-                    deductionStatus: 'Pending'
-                },
-                {
-                    $set: {
-                        deductionStatus: 'Deducted',
-                        deductedMonth: salaryMonth,
-                        deductedYear: salaryYear
-                    }
-                }
-            );
-
-            await ItemPurchase.updateMany(
-            {
-                user: user_id,
-                paymentMethod: 'Salary',
-                status: 'Pending'
-            },
-            {
-                $set: {
-                    status: 'Deducted',
-                    deductedMonth: salaryMonth,
-                    deductedYear: salaryYear
-                }
-            }
-        );
 
 module.exports = {
     generateSalary
