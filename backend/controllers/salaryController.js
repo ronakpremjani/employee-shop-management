@@ -3,6 +3,7 @@ const Attendance = require('../models/attendance');
 const Salary = require('../models/employeeTransaction/Salary');
 const LeaveManagement = require('../models/LeaveManagement');
 const AdvanceSalary = require('../models/employeeTransaction/AdvanceSalary');
+const ItemPurchase = require('../models/employeeTransaction/ItemPurchase');
 
 const getDateKey = (date) => {
     const value = new Date(date);
@@ -99,10 +100,6 @@ const generateSalary = async (req, res) => {
             dateTo: { $gte: startDate }
         });
 
-        const finalAbsentDays = absentDays - leaveRecords.length;
-        const updatedPresentDays = presentDates.size;
-        const updatedAbsentDays = workingDays - presentDates;
-
         let leaveDays = 0;
 
         leaveRecords.forEach((leave) => {
@@ -119,43 +116,25 @@ const generateSalary = async (req, res) => {
                     leaveDays++;
                 }
             }
-
-            const advanceRecords = await AdvanceSalary.find({
-                user: user_id,
-                status: 'Approved',
-                deductionStatus: 'Pending',
-                deductedMonth: salaryMonth,
-                deductedYear: salaryYear
-            });
-
-            if (advanceRecords.length > 0) {
-                const advanceDeduction = advanceRecords.reduce(
-                    (total, advance) => total + advance.amount,
-                    0
-                );
-
-                return res.status(200).json({
-                    success: true,
-                    message: 'Validation successful. Ready to generate salary.',
-                    data: {
-                        workingDays,
-                        presentDays: updatedPresentDays,
-                        absentDays: finalAbsentDays,
-                        leaveDays,
-                        totalAdvanceDeduction: advanceDeduction,
-                        netSalary
-                    }
-                }); 
-
-            }
-            });
-
-            const advanceDeduction = advanceRecords.reduce(
-            (total, advance) => total + advance.amount,
-            0
+        }); 
+        
+        const finalAbsentDays = Math.max(
+                0,
+                workingDays - presentDays - leaveDays
             );
 
-            const purchaseDeduction = await ItemPurchase.aggregate([
+        const advanceRecords = await AdvanceSalary.find({
+                user: user_id,
+                status: "Approved",
+                deductionStatus: "Pending"
+            });
+
+        const advanceDeduction = advanceRecords.reduce(
+            (total, advance) => total + advance.amount,
+            0
+        );
+
+            const itemPurchaseDeduction = await ItemPurchase.aggregate([
                 {
                     $match: {
                         
@@ -172,20 +151,66 @@ const generateSalary = async (req, res) => {
                 }
             ]);
 
-            const itemPurchaseDeduction = purchaseDeduction.length > 0 ? purchaseDeduction[0].totalAmount : 0;
+            const itemPurchaseDeduction = itemPurchaseDeduction.length > 0 ? itemPurchaseDeduction[0].totalAmount : 0;
+
+            const basicSalary = user.salary;
+            const perDaySalary = basicSalary / workingDays;
+            const earnedSalary = perDaySalary * presentDays;
+            const netSalary = Math.max(
+                        0,
+                        earnedSalary -
+                        advanceDeduction -
+                        itemPurchaseDeduction
+                    );
 
             return res.status(200).json({
                 success: true,
-                message: 'Validation successful. Ready to generate salary.',
+                message: 'Salary calculated successfully.',
                 data: {
                     workingDays,
-                    presentDays: updatedPresentDays,
+                    presentDays,
                     absentDays: finalAbsentDays,
                     leaveDays,
                     totalAdvanceDeduction: advanceDeduction,
                     netSalary
                 }
             }); 
+
+            // -------------------------
+            // Create Salary
+            // -------------------------
+
+            const salary = await Salary.create({
+                user: user._id,
+                month: salaryMonth,
+                year: salaryYear,
+
+                basicSalary,
+
+                workingDays,
+                presentDays,
+                leaveDays,
+                absentDays: finalAbsentDays,
+
+                advanceDeduction,
+                purchaseDeduction: itemPurchaseDeduction,
+
+                bonus: 0, // We'll implement later
+
+                netSalary,
+
+                generatedBy: req.user._id
+            });
+
+            // -------------------------
+            // Return Response
+            // -------------------------
+
+            return res.status(201).json({
+                success: true,
+                message: 'Salary generated successfully.',
+                data: salary
+            });
 
     } catch (error) {
         return res.status(500).json({
@@ -194,6 +219,36 @@ const generateSalary = async (req, res) => {
         });
     }
 };
+
+await AdvanceSalary.updateMany(
+                {
+                    user: user_id,
+                    status: 'Approved',
+                    deductionStatus: 'Pending'
+                },
+                {
+                    $set: {
+                        deductionStatus: 'Deducted',
+                        deductedMonth: salaryMonth,
+                        deductedYear: salaryYear
+                    }
+                }
+            );
+
+            await ItemPurchase.updateMany(
+            {
+                user: user_id,
+                paymentMethod: 'Salary',
+                status: 'Pending'
+            },
+            {
+                $set: {
+                    status: 'Deducted',
+                    deductedMonth: salaryMonth,
+                    deductedYear: salaryYear
+                }
+            }
+        );
 
 module.exports = {
     generateSalary
