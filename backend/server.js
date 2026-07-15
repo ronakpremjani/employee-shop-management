@@ -22,8 +22,8 @@ const adminRoutes = require('./routes/adminRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const salaryRoutes = require('./routes/salaryRoutes');
 const leaveRoutes = require('./routes/leaveRoutes');
-const AdvanceSalaryRoutes = require('./routes/AdvanceSalaryRoutes');
-const ItemPurchaseRoutes = require('./routes/ItemPurchaseRoutes');
+const advanceSalaryRoutes = require('./routes/advanceSalaryRoutes');
+const itemPurchaseRoutes = require('./routes/itemPurchaseRoutes');
 
 app.use(cors({
     origin: [
