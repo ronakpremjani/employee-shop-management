@@ -7,7 +7,7 @@ const {
     getMyAdvanceSalaryRequests,
     approveAdvanceSalaryRequest,
     rejectAdvanceSalaryRequest
-} = require('../controllers/AdvanceSalaryController');
+} = require('../controllers/advanceSalaryController');
 
 const { protect } = require('../middleware/authMiddleware');
 const { adminOnly } = require('../middleware/adminMiddleware');
