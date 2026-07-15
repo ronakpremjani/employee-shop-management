@@ -23,7 +23,7 @@ const attendanceRoutes = require('./routes/attendanceRoutes');
 const salaryRoutes = require('./routes/salaryRoutes');
 const leaveRoutes = require('./routes/leaveRoutes');
 const AdvanceSalaryRoutes = require('./routes/AdvanceSalaryRoutes');
-const itemPurchaseRoutes = require('./routes/itemPurchaseRoutes');
+const ItemPurchaseRoutes = require('./routes/ItemPurchaseRoutes');
 
 app.use(cors({
     origin: [
@@ -40,7 +40,7 @@ app.use('/api/attendance', attendanceRoutes);
 app.use('/api/salary', salaryRoutes);
 app.use('/api/leave', leaveRoutes);
 app.use('/api/advance-salary', AdvanceSalaryRoutes);
-app.use('/api/purchase', itemPurchaseRoutes);
+app.use('/api/purchase', ItemPurchaseRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running...');

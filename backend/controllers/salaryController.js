@@ -3,7 +3,7 @@ const Attendance = require('../models/attendance');
 const Salary = require('../models/employeeTransaction/Salary');
 const LeaveManagement = require('../models/LeaveManagement');
 const AdvanceSalary = require('../models/employeeTransaction/AdvanceSalary');
-const ItemPurchase = require('../models/employeeTransaction/itemPurchase');
+const ItemPurchase = require('../models/employeeTransaction/ItemPurchase');
 
 const getDateKey = (date) => {
     const value = new Date(date);
@@ -151,7 +151,7 @@ const generateSalary = async (req, res) => {
                 }
             ]);
 
-            const itemPurchaseDeduction = purchaseSummary.length > 0 ? purchaseSummary[0].totalAmount : 0;
+            const ItemPurchaseDeduction = purchaseSummary.length > 0 ? purchaseSummary[0].totalAmount : 0;
 
             const basicSalary = user.salary;
             const perDaySalary = workingDays > 0 ? basicSalary / workingDays : 0;
@@ -160,7 +160,7 @@ const generateSalary = async (req, res) => {
                         0,
                         earnedSalary -
                         advanceDeduction -
-                        itemPurchaseDeduction
+                        ItemPurchaseDeduction
                     );
 
             // -------------------------
@@ -182,7 +182,7 @@ const generateSalary = async (req, res) => {
                 absentDays: finalAbsentDays,
 
                 advanceDeduction,
-                purchaseDeduction: itemPurchaseDeduction,
+                purchaseDeduction: ItemPurchaseDeduction,
 
                 bonus: 0, // We'll implement later
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const itemPurchaseSchema = new mongoose.Schema({
+const ItemPurchaseSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -55,4 +55,4 @@ const itemPurchaseSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('ItemPurchase', itemPurchaseSchema);
+module.exports = mongoose.model('ItemPurchase', ItemPurchaseSchema);
