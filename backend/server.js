@@ -39,8 +39,8 @@ app.use('/api/staff', adminRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/salary', salaryRoutes);
 app.use('/api/leave', leaveRoutes);
-app.use('/api/advance-salary', AdvanceSalaryRoutes);
-app.use('/api/purchase', ItemPurchaseRoutes);
+app.use('/api/advance-salary', advanceSalaryRoutes);
+app.use('/api/purchase', itemPurchaseRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Running...');
