@@ -27,8 +27,7 @@ const itemPurchaseRoutes = require('./routes/itemPurchaseRoutes');
 
 app.use(cors({
     origin: [
-        "http://localhost:5173",
-        "https://ls.vercel.app"
+        "https://employee-shop-management.vercel.app"
     ],
     credentials: true
 }));
