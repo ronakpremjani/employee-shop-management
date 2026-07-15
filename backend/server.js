@@ -25,7 +25,13 @@ const leaveRoutes = require('./routes/leaveRoutes');
 const advanceSalaryRoutes = require('./routes/advanceSalaryRoutes');
 const itemPurchaseRoutes = require('./routes/itemPurchaseRoutes');
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://ls.vercel.app"
+    ],
+    credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);

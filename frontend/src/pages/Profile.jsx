@@ -212,7 +212,7 @@ const Profile = () => {
                 <div className="space-y-1">
                   <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Monthly Base Salary</span>
                   <p className="text-emerald-400 font-bold">
-                    ₹{Number(user.salary).toLocaleString('en-IN')}
+                    ₹{Number(user?.salary ?? 0).toLocaleString('en-IN')}
                   </p>
                 </div>
               )}
