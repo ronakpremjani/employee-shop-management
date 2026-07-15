@@ -5,7 +5,7 @@ const {
     createItemPurchase,
     getAllItemPurchases,
     getMyItemPurchases
-} = require('../controllers/ItemPurchaseController');
+} = require('../controllers/itemPurchaseController');
 
 const { protect } = require('../middleware/authMiddleware');
 const { adminOnly } = require('../middleware/adminMiddleware');
