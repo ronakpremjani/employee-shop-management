@@ -3,7 +3,7 @@ const Attendance = require('../models/attendance');
 const Salary = require('../models/employeeTransaction/Salary');
 const LeaveManagement = require('../models/LeaveManagement');
 const AdvanceSalary = require('../models/employeeTransaction/AdvanceSalary');
-const ItemPurchase = require('../models/employeeTransaction/ItemPurchase');
+const ItemPurchase = require('../models/employeeTransaction/itemPurchase');
 
 const getDateKey = (date) => {
     const value = new Date(date);

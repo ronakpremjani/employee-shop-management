@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const advanceSalarySchema = new mongoose.Schema(
+const AdvanceSalarySchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -81,4 +81,4 @@ const advanceSalarySchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('AdvanceSalary', advanceSalarySchema);
+module.exports = mongoose.model('AdvanceSalary', AdvanceSalarySchema);
