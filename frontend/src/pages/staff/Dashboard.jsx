@@ -83,27 +83,27 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <NavLink
             to="/staff/attendance"
-            className="flex flex-col items-center justify-center p-6 bg-white/[0.01] hover:bg-blue-600/10 border border-white/5 hover:border-blue-500/20 rounded-2xl text-center transition-all group"
+            className="flex flex-col items-center justify-center p-6 bg-white/[0.01] hover:bg-orange-600/10 border border-white/5 hover:border-orange-500/20 rounded-2xl text-center transition-all group"
           >
-            <CalendarCheck className="w-8 h-8 text-blue-500 group-hover:scale-110 transition-transform mb-3" />
+            <CalendarCheck className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform mb-3" />
             <span className="text-sm font-bold text-white">Check In / Out</span>
             <span className="text-xs text-gray-400 mt-1">Record daily attendance logs</span>
           </NavLink>
 
           <NavLink
             to="/staff/leaves"
-            className="flex flex-col items-center justify-center p-6 bg-white/[0.01] hover:bg-blue-600/10 border border-white/5 hover:border-blue-500/20 rounded-2xl text-center transition-all group"
+            className="flex flex-col items-center justify-center p-6 bg-white/[0.01] hover:bg-orange-600/10 border border-white/5 hover:border-orange-500/20 rounded-2xl text-center transition-all group"
           >
-            <CalendarDays className="w-8 h-8 text-blue-500 group-hover:scale-110 transition-transform mb-3" />
+            <CalendarDays className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform mb-3" />
             <span className="text-sm font-bold text-white">Apply for Leave</span>
             <span className="text-xs text-gray-400 mt-1">Submit time-off requests</span>
           </NavLink>
 
           <NavLink
             to="/staff/advances"
-            className="flex flex-col items-center justify-center p-6 bg-white/[0.01] hover:bg-blue-600/10 border border-white/5 hover:border-blue-500/20 rounded-2xl text-center transition-all group"
+            className="flex flex-col items-center justify-center p-6 bg-white/[0.01] hover:bg-orange-600/10 border border-white/5 hover:border-orange-500/20 rounded-2xl text-center transition-all group"
           >
-            <HandCoins className="w-8 h-8 text-blue-500 group-hover:scale-110 transition-transform mb-3" />
+            <HandCoins className="w-8 h-8 text-orange-500 group-hover:scale-110 transition-transform mb-3" />
             <span className="text-sm font-bold text-white">Request Advance</span>
             <span className="text-xs text-gray-400 mt-1">Borrow from next pay period</span>
           </NavLink>
@@ -114,3 +114,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

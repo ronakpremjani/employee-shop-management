@@ -4,18 +4,18 @@
 
 :root {
   /* Premium Light Theme */
-  --bg-app: #fcfcfd;
+  --bg-app: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.8);
   --bg-glass-hover: rgba(255, 255, 255, 0.95);
-  --border-glass: rgba(228, 228, 231, 0.8); /* zinc-200 */
-  --text-main: #09090b; /* zinc-950 */
-  --text-muted: #71717a; /* zinc-500 */
+  --border-glass: rgba(0, 0, 0, 0.1); 
+  --text-main: #000000; 
+  --text-muted: #666666; 
   --bg-input: #ffffff;
-  --border-input: #e4e4e7; /* zinc-200 */
+  --border-input: #e5e5e5; 
   --bg-card: #ffffff;
   
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
+  --accent: #f97316;
+  --accent-hover: #ea580c;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
@@ -23,15 +23,15 @@
 
 :root.dark, body, html {
   /* Defaulting to Premium Dark Theme to match layout specs */
-  --bg-app: #09090b; /* zinc-950 */
-  --bg-glass: rgba(9, 9, 11, 0.75);
-  --bg-glass-hover: rgba(24, 24, 27, 0.85); /* zinc-900 */
-  --border-glass: rgba(39, 39, 42, 0.6); /* zinc-800 */
-  --text-main: #fafafa; /* zinc-50 */
-  --text-muted: #a1a1aa; /* zinc-400 */
-  --bg-input: #09090b;
-  --border-input: rgba(39, 39, 42, 0.8); /* zinc-800 */
-  --bg-card: #09090b;
+  --bg-app: #000000; 
+  --bg-glass: rgba(0, 0, 0, 0.75);
+  --bg-glass-hover: rgba(20, 20, 20, 0.85); 
+  --border-glass: rgba(255, 255, 255, 0.1); 
+  --text-main: #ffffff; 
+  --text-muted: #a3a3a3; 
+  --bg-input: #000000;
+  --border-input: rgba(255, 255, 255, 0.2); 
+  --bg-card: #000000;
 }
 
 @layer base {
@@ -80,7 +80,7 @@
 }
 .glass-hover:hover {
   background: var(--bg-glass-hover);
-  border-color: rgba(37, 99, 235, 0.4); /* Accent Blue shadow border */
+  border-color: rgba(249, 115, 22, 0.4); /* Accent Orange shadow border */
   box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.3);
 }
 
@@ -105,11 +105,11 @@
 
 /* Premium Gradient Text */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-orange-100 to-orange-300;
 }
 
 .gradient-blue {
-  @apply bg-gradient-to-r from-blue-600 to-blue-500;
+  @apply bg-gradient-to-r from-orange-600 to-orange-500;
 }
 
 /* Premium Subtle Animations */

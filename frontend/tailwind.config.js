@@ -8,14 +8,14 @@ export default {
     extend: {
       colors: {
         accent: {
-          DEFAULT: '#2563EB',
-          hover: '#1D4ED8',
-          light: '#DBEAFE',
+          DEFAULT: '#F97316',
+          hover: '#EA580C',
+          light: '#FFEDD5',
         },
         darkbg: {
-          DEFAULT: '#0F172A',
-          card: '#1E293B',
-          border: '#334155',
+          DEFAULT: '#000000',
+          card: '#0A0A0A',
+          border: '#171717',
         }
       },
     },

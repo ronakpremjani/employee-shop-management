@@ -104,7 +104,7 @@ const Attendance = () => {
               </div>
             ) : isCheckedIn ? (
               <div className="space-y-1">
-                <div className="flex items-center justify-center sm:justify-start space-x-2 text-blue-400 font-bold text-lg">
+                <div className="flex items-center justify-center sm:justify-start space-x-2 text-orange-400 font-bold text-lg">
                   <Clock className="w-5 h-5 animate-pulse" />
                   <span>On Duty (Checked In)</span>
                 </div>
@@ -150,7 +150,7 @@ const Attendance = () => {
               <button
                 onClick={handleCheckIn}
                 disabled={loading}
-                className="w-full sm:w-auto flex items-center justify-center px-8 py-3 bg-blue-600 hover:bg-blue-500 font-bold text-white text-sm rounded-xl transition-all shadow-lg shadow-blue-900/20"
+                className="w-full sm:w-auto flex items-center justify-center px-8 py-3 bg-orange-600 hover:bg-orange-500 font-bold text-white text-sm rounded-xl transition-all shadow-lg shadow-orange-900/20"
               >
                 {loading ? <Spinner size="sm" className="mr-2" /> : <LogIn className="w-4 h-4 mr-2" />}
                 Check In
@@ -175,3 +175,4 @@ const Attendance = () => {
 };
 
 export default Attendance;
+

@@ -3,27 +3,27 @@
 @import "tailwindcss";
 
 :root {
-  --bg-app: #f1f5f9;
+  --bg-app: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.75);
   --bg-glass-hover: rgba(255, 255, 255, 0.9);
   --border-glass: rgba(0, 0, 0, 0.08);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
+  --text-main: #000000;
+  --text-muted: #666666;
   --bg-input: #ffffff;
-  --border-input: #cbd5e1;
+  --border-input: #e5e5e5;
   --bg-card: #ffffff;
 }
 
 :root.dark {
-  --bg-app: #07090e;
-  --bg-glass: rgba(15, 23, 42, 0.65);
-  --bg-glass-hover: rgba(15, 23, 42, 0.8);
+  --bg-app: #000000;
+  --bg-glass: rgba(0, 0, 0, 0.65);
+  --bg-glass-hover: rgba(20, 20, 20, 0.8);
   --border-glass: rgba(255, 255, 255, 0.08);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --bg-input: #0f172a;
+  --text-main: #ffffff;
+  --text-muted: #a3a3a3;
+  --bg-input: #000000;
   --border-input: rgba(255, 255, 255, 0.05);
-  --bg-card: #0f172a;
+  --bg-card: #000000;
 }
 
 @layer base {
@@ -65,7 +65,7 @@
 }
 .glass-hover:hover {
   background: var(--bg-glass-hover);
-  border-color: rgba(37, 99, 235, 0.3);
+  border-color: rgba(249, 115, 22, 0.3); /* Accent Orange */
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
 }
 
@@ -95,11 +95,11 @@
 
 /* Premium Gradient Text */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 dark:from-white dark:via-slate-200 dark:to-blue-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-orange-400 dark:from-white dark:via-orange-200 dark:to-orange-500;
 }
 
 .gradient-blue {
-  @apply bg-gradient-to-r from-blue-600 to-blue-500;
+  @apply bg-gradient-to-r from-orange-600 to-orange-500;
 }
 
 /* Custom Micro-animations */

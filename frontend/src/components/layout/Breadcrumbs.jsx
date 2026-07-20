@@ -30,7 +30,7 @@ const Breadcrumbs = () => {
       {/* Home link */}
       <Link
         to="/"
-        className="flex items-center hover:text-blue-500 transition-colors"
+        className="flex items-center hover:text-orange-500 transition-colors"
       >
         <Home className="w-3.5 h-3.5" />
       </Link>
@@ -44,13 +44,13 @@ const Breadcrumbs = () => {
           <React.Fragment key={to}>
             <ChevronRight className="w-3.5 h-3.5 text-gray-500 shrink-0" />
             {isLast ? (
-              <span className="text-blue-500 font-semibold truncate dark:text-blue-400">
+              <span className="text-orange-500 font-semibold truncate dark:text-orange-400">
                 {translatedLabel}
               </span>
             ) : (
               <Link
                 to={to}
-                className="hover:text-blue-500 transition-colors hover:underline truncate"
+                className="hover:text-orange-500 transition-colors hover:underline truncate"
               >
                 {translatedLabel}
               </Link>
@@ -63,3 +63,4 @@ const Breadcrumbs = () => {
 };
 
 export default Breadcrumbs;
+

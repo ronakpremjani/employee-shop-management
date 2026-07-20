@@ -130,7 +130,7 @@ const DataTable = ({
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearchChange}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/10 transition-all shadow-sm"
+              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/60 focus:ring-2 focus:ring-orange-500/10 transition-all shadow-sm"
             />
           </div>
         )}
@@ -177,7 +177,7 @@ const DataTable = ({
               <select
                 value={selectedFilters[filter.key] || 'all'}
                 onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500/50 shadow-inner cursor-pointer"
+                className="w-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-orange-500/50 shadow-inner cursor-pointer"
               >
                 <option value="all">All</option>
                 {filter.options.map((opt) => (
@@ -331,3 +331,4 @@ const DataTable = ({
 };
 
 export default DataTable;
+

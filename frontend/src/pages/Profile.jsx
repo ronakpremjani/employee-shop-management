@@ -72,7 +72,7 @@ const Profile = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Side: Avatar & Readonly Stats */}
         <div className="glass p-6 rounded-2xl border border-white/5 flex flex-col items-center text-center space-y-4 md:col-span-1">
-          <div className="w-20 h-20 rounded-2xl bg-blue-600/10 border-2 border-blue-500/20 flex items-center justify-center font-bold text-blue-400 text-3xl shadow-xl shadow-blue-500/5">
+          <div className="w-20 h-20 rounded-2xl bg-orange-600/10 border-2 border-orange-500/20 flex items-center justify-center font-bold text-orange-400 text-3xl shadow-xl shadow-orange-500/5">
             {user?.name?.charAt(0).toUpperCase() || 'U'}
           </div>
           
@@ -83,7 +83,7 @@ const Profile = () => {
 
           <div className="w-full pt-4 border-t border-white/5 space-y-3.5 text-left text-xs">
             <div className="flex items-center text-gray-400">
-              <Award className="w-4 h-4 mr-2.5 text-blue-500 shrink-0" />
+              <Award className="w-4 h-4 mr-2.5 text-orange-500 shrink-0" />
               <div>
                 <p className="font-semibold text-white capitalize">{user?.role}</p>
                 <p className="text-[10px] text-gray-500">Security Clearance</p>
@@ -91,7 +91,7 @@ const Profile = () => {
             </div>
             
             <div className="flex items-center text-gray-400">
-              <ToggleLeft className="w-4 h-4 mr-2.5 text-blue-500 shrink-0" />
+              <ToggleLeft className="w-4 h-4 mr-2.5 text-orange-500 shrink-0" />
               <div>
                 <p className="font-semibold text-white">{user?.status || 'Active'}</p>
                 <p className="text-[10px] text-gray-500">Status Indicator</p>
@@ -99,7 +99,7 @@ const Profile = () => {
             </div>
 
             <div className="flex items-center text-gray-400">
-              <Calendar className="w-4 h-4 mr-2.5 text-blue-500 shrink-0" />
+              <Calendar className="w-4 h-4 mr-2.5 text-orange-500 shrink-0" />
               <div>
                 <p className="font-semibold text-white">
                   {user?.joiningDate ? new Date(user.joiningDate).toLocaleDateString('en-IN') : '2026-07-14'}
@@ -117,7 +117,7 @@ const Profile = () => {
             {!isEditing ? (
               <button
                 onClick={() => setIsEditing(true)}
-                className="inline-flex items-center text-xs font-semibold text-blue-400 hover:text-blue-300 transition-all border border-blue-500/20 hover:bg-blue-600/10 px-3 py-1.5 rounded-xl"
+                className="inline-flex items-center text-xs font-semibold text-orange-400 hover:text-orange-300 transition-all border border-orange-500/20 hover:bg-orange-600/10 px-3 py-1.5 rounded-xl"
               >
                 <Edit2 className="w-3.5 h-3.5 mr-1.5" />
                 Edit Profile
@@ -175,7 +175,7 @@ const Profile = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-500 font-semibold text-white text-sm rounded-xl transition-all shadow-lg"
+                  className="inline-flex items-center px-4 py-2 bg-orange-600 hover:bg-orange-500 font-semibold text-white text-sm rounded-xl transition-all shadow-lg"
                 >
                   {loading ? <Spinner size="sm" className="mr-2" /> : <Save className="w-4 h-4 mr-2" />}
                   Save Details
@@ -225,3 +225,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

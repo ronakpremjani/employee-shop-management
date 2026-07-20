@@ -1,37 +1,28 @@
-let toastRef = null;
+import hotToast from 'react-hot-toast';
 
 export const setToastRef = (ref) => {
-  toastRef = ref;
+  // Kept for backward compatibility if it's called anywhere, though it does nothing now.
 };
 
 const toast = {
-  success: (message, title = 'Success') => {
-    if (toastRef) {
-      toastRef.show({ severity: 'success', summary: title, detail: message, life: 4000 });
-    } else {
-      console.log('Success:', message);
-    }
+  success: (message, title) => {
+    // We can ignore title or format it, but react-hot-toast usually just takes a string or JSX
+    hotToast.success(title ? `${title}: ${message}` : message);
   },
-  error: (message, title = 'Error') => {
-    if (toastRef) {
-      toastRef.show({ severity: 'error', summary: title, detail: message, life: 4000 });
-    } else {
-      console.error('Error:', message);
-    }
+  error: (message, title) => {
+    hotToast.error(title ? `${title}: ${message}` : message);
   },
-  warn: (message, title = 'Warning') => {
-    if (toastRef) {
-      toastRef.show({ severity: 'warn', summary: title, detail: message, life: 4000 });
-    } else {
-      console.warn('Warning:', message);
-    }
+  warn: (message, title) => {
+    // react-hot-toast doesn't have a built-in warn, we can use a custom icon or just plain toast
+    hotToast(title ? `${title}: ${message}` : message, {
+      icon: '⚠️',
+    });
   },
-  info: (message, title = 'Info') => {
-    if (toastRef) {
-      toastRef.show({ severity: 'info', summary: title, detail: message, life: 4000 });
-    } else {
-      console.log('Info:', message);
-    }
+  info: (message, title) => {
+    // plain toast for info
+    hotToast(title ? `${title}: ${message}` : message, {
+      icon: 'ℹ️',
+    });
   }
 };
 

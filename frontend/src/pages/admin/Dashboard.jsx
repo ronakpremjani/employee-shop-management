@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Users, UserCheck, UserX, CalendarClock, HandCoins, DollarSign } from 'lucide-react';
 import StatCard from '../../components/ui/StatCard';
 import { fetchStaffList } from '../../store/staffSlice';
-import { fetchLeaveRequests } from '../../store/leaveSlice';
-import { fetchAdvanceRequests } from '../../store/advanceSlice';
+import { fetchLeaveRequests, changeLeaveStatus } from '../../store/leaveSlice';
+import { fetchAdvanceRequests, changeAdvanceStatus } from '../../store/advanceSlice';
 import { fetchSalaries } from '../../store/salarySlice';
+import { useNavigate } from 'react-router-dom';
+import toast from '../../utils/toast';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   // Connect to Redux store
   const { list: staffList, loading: staffLoading } = useSelector((state) => state.staff);
@@ -44,6 +47,24 @@ const Dashboard = () => {
 
   const isGlobalLoading = staffLoading || leaveLoading || advanceLoading || salaryLoading;
 
+  const handleLeaveAction = async (id, status) => {
+    try {
+      await dispatch(changeLeaveStatus({ id, status })).unwrap();
+      toast.success(`Leave request ${status.toLowerCase()} successfully`);
+    } catch (err) {
+      toast.error(err || 'Failed to update leave request');
+    }
+  };
+
+  const handleAdvanceAction = async (id, status) => {
+    try {
+      await dispatch(changeAdvanceStatus({ id, status })).unwrap();
+      toast.success(`Advance request ${status.toLowerCase()} successfully`);
+    } catch (err) {
+      toast.error(err || 'Failed to update advance request');
+    }
+  };
+
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Header */}
@@ -61,6 +82,7 @@ const Dashboard = () => {
           value={activeStaffCount}
           icon={Users}
           isLoading={isGlobalLoading}
+          onClick={() => navigate('/admin/staff')}
         />
         <StatCard
           title="Present Today"
@@ -69,12 +91,14 @@ const Dashboard = () => {
           isLoading={isGlobalLoading}
           trend={{ type: 'up', value: '4%' }}
           trendLabel="compared to yesterday"
+          onClick={() => navigate('/admin/attendance')}
         />
         <StatCard
           title="Absent Today"
           value={absentToday}
           icon={UserX}
           isLoading={isGlobalLoading}
+          onClick={() => navigate('/admin/attendance')}
         />
         <StatCard
           title="Pending Leaves"
@@ -83,6 +107,7 @@ const Dashboard = () => {
           isLoading={isGlobalLoading}
           trend={pendingLeaves > 0 ? { type: 'up', value: pendingLeaves } : null}
           trendLabel="requests awaiting review"
+          onClick={() => navigate('/admin/leaves')}
         />
         <StatCard
           title="Pending Advances"
@@ -91,12 +116,14 @@ const Dashboard = () => {
           isLoading={isGlobalLoading}
           trend={pendingAdvances > 0 ? { type: 'up', value: pendingAdvances } : null}
           trendLabel="salary loans requested"
+          onClick={() => navigate('/admin/advances')}
         />
         <StatCard
           title="Monthly Salary Budget"
           value={`₹${salaryExpense.toLocaleString('en-IN')}`}
           icon={DollarSign}
           isLoading={isGlobalLoading}
+          onClick={() => navigate('/admin/salaries')}
         />
       </div>
 
@@ -105,7 +132,7 @@ const Dashboard = () => {
         {/* Pending Leaves Quick View */}
         <div className="glass p-6 rounded-2xl border border-white/5 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/5">
-            <h3 className="text-lg font-bold text-white tracking-wide">Pending Leave Requests</h3>
+            <h3 className="text-lg font-bold text-white tracking-wide">Leave Request</h3>
             <span className="text-xs font-semibold text-gray-400">{pendingLeaves} total</span>
           </div>
           
@@ -116,13 +143,24 @@ const Dashboard = () => {
                   <p className="text-sm font-semibold text-white">{leave.user?.name || 'Staff Member'}</p>
                   <p className="text-xs text-gray-400 mt-0.5">Reason: {leave.reason}</p>
                 </div>
-                <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg">
-                  Pending Review
-                </span>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={() => handleLeaveAction(leave._id, 'Approved')}
+                    className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Approve
+                  </button>
+                  <button 
+                    onClick={() => handleLeaveAction(leave._id, 'Rejected')}
+                    className="text-[10px] font-bold text-rose-400 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Reject
+                  </button>
+                </div>
               </div>
             ))}
             {pendingLeaves === 0 && (
-              <p className="text-sm text-gray-400 text-center py-6">All leave requests have been processed!</p>
+              <p className="text-sm text-gray-400 text-center py-6">No leave requests found.</p>
             )}
           </div>
         </div>
@@ -130,7 +168,7 @@ const Dashboard = () => {
         {/* Pending Advances Quick View */}
         <div className="glass p-6 rounded-2xl border border-white/5 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/5">
-            <h3 className="text-lg font-bold text-white tracking-wide">Pending Advances</h3>
+            <h3 className="text-lg font-bold text-white tracking-wide">Advance Salary Request</h3>
             <span className="text-xs font-semibold text-gray-400">{pendingAdvances} total</span>
           </div>
           
@@ -141,13 +179,24 @@ const Dashboard = () => {
                   <p className="text-sm font-semibold text-white">{adv.user?.name || 'Staff Member'}</p>
                   <p className="text-xs text-gray-400 mt-0.5">Amount requested: ₹{adv.amount.toLocaleString('en-IN')}</p>
                 </div>
-                <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-lg">
-                  ₹{adv.amount.toLocaleString('en-IN')}
-                </span>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={() => handleAdvanceAction(adv._id, 'Approved')}
+                    className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Approve
+                  </button>
+                  <button 
+                    onClick={() => handleAdvanceAction(adv._id, 'Rejected')}
+                    className="text-[10px] font-bold text-rose-400 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Reject
+                  </button>
+                </div>
               </div>
             ))}
             {pendingAdvances === 0 && (
-              <p className="text-sm text-gray-400 text-center py-6">No advance requests pending.</p>
+              <p className="text-sm text-gray-400 text-center py-6">No advance salary requests found.</p>
             )}
           </div>
         </div>

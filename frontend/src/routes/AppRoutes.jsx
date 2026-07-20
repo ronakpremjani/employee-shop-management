@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 import AuthLayout from '../layouts/AuthLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import StaffLayout from '../layouts/StaffLayout';
+import UserLayout from '../layouts/UserLayout';
 
 // Pages
+import Landing from '../pages/Landing';
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
 
@@ -37,14 +39,14 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {/* Root redirect */}
+      {/* Root Route: Landing Page or Redirect */}
       <Route
         path="/"
         element={
           isAuthenticated && user ? (
-            <Navigate to={user.role === 'admin' ? '/admin/dashboard' : '/staff/dashboard'} replace />
+            <Navigate to={user.role === 'admin' ? '/admin/dashboard' : user.role === 'staff' ? '/staff/dashboard' : '/user/dashboard'} replace />
           ) : (
-            <Navigate to="/login" replace />
+            <Landing />
           )
         }
       />
@@ -79,6 +81,15 @@ const AppRoutes = () => {
         <Route path="salaries" element={<StaffSalaries />} />
         <Route path="profile" element={<Profile />} />
         {/* Redirect empty sub-paths */}
+        <Route path="" element={<Navigate to="dashboard" replace />} />
+      </Route>
+
+      {/* User Protected Route (Pending Approval) */}
+      <Route path="/user" element={
+        isAuthenticated && user?.role === 'user' ? <UserLayout /> : <Navigate to="/" replace />
+      }>
+        <Route path="dashboard" element={<div />} /> 
+        {/* The UserLayout handles the entire view, so no sub-components needed */}
         <Route path="" element={<Navigate to="dashboard" replace />} />
       </Route>
 
