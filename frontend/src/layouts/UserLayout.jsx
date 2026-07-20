@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../store/authSlice';
+import { logoutUser } from '../store/authSlice';
 import Navbar from '../components/layout/Navbar';
 import toast from '../utils/toast';
 import { Clock } from 'lucide-react';
@@ -13,7 +13,7 @@ const UserLayout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
     navigate('/');
     toast.success('Logged out successfully');
   };

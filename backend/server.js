@@ -11,6 +11,7 @@ console.log(dns.getServers());
 
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const connectDB = require('./config/db');
 
@@ -27,11 +28,13 @@ const itemPurchaseRoutes = require('./routes/itemPurchaseRoutes');
 
 app.use(cors({
     origin: [
-        "https://employee-shop-management.vercel.app"
-    ],
+        "https://employee-shop-management.vercel.app",
+        "http://localhost:5174"
+          ],
     credentials: true
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/staff', adminRoutes);

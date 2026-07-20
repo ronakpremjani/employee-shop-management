@@ -3,19 +3,14 @@ const User = require('../models/User');
 
 const protect = async (req, res, next) => {
 
-    const authHeader = req.headers.authorization;
+    const token = req.cookies.token;
 
-    if (
-        !authHeader ||
-        !authHeader.startsWith('Bearer ')
-    ) {
+    if (!token) {
         return res.status(401).json({
             success: false,
             message: 'Not authorized, no token'
         });
     }
-
-const token = authHeader.split(' ')[1];
 
     try {
 

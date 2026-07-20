@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from '../components/layout/Sidebar';
 import Navbar from '../components/layout/Navbar';
 import Breadcrumbs from '../components/layout/Breadcrumbs';
-import { logout } from '../store/authSlice';
+import { logoutUser } from '../store/authSlice';
 
 const AdminLayout = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
@@ -20,7 +20,7 @@ const AdminLayout = () => {
   }
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
   };
 
   return (

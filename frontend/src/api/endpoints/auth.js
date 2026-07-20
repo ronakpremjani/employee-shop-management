@@ -11,3 +11,7 @@ export const register = async (userData) => {
 export const getMe = async () => {
   return api.get('/auth/me');
 };
+
+export const logout = async () => {
+  return api.post('/auth/logout');
+};

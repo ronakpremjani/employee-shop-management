@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from '../components/layout/Sidebar';
 import Navbar from '../components/layout/Navbar';
 import Breadcrumbs from '../components/layout/Breadcrumbs';
-import { logout } from '../store/authSlice';
+import { logoutUser } from '../store/authSlice';
 
 const StaffLayout = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
@@ -22,12 +22,12 @@ const StaffLayout = () => {
 
   // If user status is Inactive, block them and show notification
   if (user?.status === 'Inactive') {
-    dispatch(logout());
+    dispatch(logoutUser());
     return <Navigate to="/" replace />;
   }
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
   };
 
   return (
