@@ -141,7 +141,7 @@ const Salaries = () => {
             reset({ user_id: '', month: currentMonth, year: currentYear });
             setGenerateOpen(true);
           }}
-          className="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-500 font-semibold text-white text-sm rounded-xl transition-all shadow-lg shadow-blue-900/20"
+          className="inline-flex items-center justify-center px-4 py-2.5 bg-orange-600 hover:bg-orange-500 font-semibold text-white text-sm rounded-xl transition-all shadow-lg shadow-orange-900/20"
         >
           <Plus className="w-4 h-4 mr-2" />
           Generate Salary
@@ -215,8 +215,8 @@ const Salaries = () => {
             />
           </div>
 
-          <div className="bg-blue-600/5 border border-blue-500/10 p-4 rounded-xl flex items-start space-x-3 text-xs leading-relaxed text-gray-300">
-            <HelpCircle className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+          <div className="bg-orange-600/5 border border-orange-500/10 p-4 rounded-xl flex items-start space-x-3 text-xs leading-relaxed text-gray-300">
+            <HelpCircle className="w-5 h-5 text-orange-400 shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold text-white mb-0.5">Automated Ledger Calculation</p>
               Generating this payslip will pull the attendance logs, deduct pending advance salaries and tab items purchases automatically, then calculate the net payouts.
@@ -234,7 +234,7 @@ const Salaries = () => {
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 font-semibold text-white text-sm rounded-xl transition-all shadow-lg"
+              className="px-4 py-2 bg-orange-600 hover:bg-orange-500 font-semibold text-white text-sm rounded-xl transition-all shadow-lg"
             >
               Calculate Salary
             </button>
@@ -323,3 +323,4 @@ const Salaries = () => {
 };
 
 export default Salaries;
+

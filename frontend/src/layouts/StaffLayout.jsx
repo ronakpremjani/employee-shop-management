@@ -12,18 +12,18 @@ const StaffLayout = () => {
   const dispatch = useDispatch();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // Allow admins to view staff pages or redirect if inactive?
   if (user?.role !== 'staff' && user?.role !== 'admin') {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // If user status is Inactive, block them and show notification
   if (user?.status === 'Inactive') {
     dispatch(logout());
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   const handleLogout = () => {

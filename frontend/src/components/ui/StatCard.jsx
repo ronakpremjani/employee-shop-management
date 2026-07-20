@@ -8,9 +8,13 @@ const StatCard = ({
   trendLabel = 'vs last month',
   className = '',
   isLoading = false,
+  onClick
 }) => {
   return (
-    <div className={`bg-zinc-950 p-5 rounded-lg border border-zinc-900 shadow-sm transition-all duration-200 hover:border-zinc-800 hover:shadow-md group ${className}`}>
+    <div 
+      onClick={onClick}
+      className={`bg-zinc-950 p-5 rounded-lg border border-zinc-900 shadow-sm transition-all duration-200 hover:border-zinc-800 hover:shadow-md group ${onClick ? 'cursor-pointer' : ''} ${className}`}
+    >
       <div className="flex justify-between items-start">
         <div className="space-y-2 flex-1">
           <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block select-none">
@@ -39,7 +43,7 @@ const StatCard = ({
         </div>
 
         {Icon && (
-          <div className="p-2 bg-zinc-900 border border-zinc-800/80 rounded-md text-zinc-400 group-hover:text-blue-500 group-hover:border-blue-500/10 group-hover:bg-blue-500/5 transition-all">
+          <div className="p-2 bg-zinc-900 border border-zinc-800/80 rounded-md text-zinc-400 group-hover:text-orange-500 group-hover:border-orange-500/10 group-hover:bg-orange-500/5 transition-all">
             <Icon className="w-4 h-4" />
           </div>
         )}
@@ -49,3 +53,4 @@ const StatCard = ({
 };
 
 export default StatCard;
+

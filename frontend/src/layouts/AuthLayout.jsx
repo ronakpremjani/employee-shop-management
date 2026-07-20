@@ -14,7 +14,7 @@ const AuthLayout = () => {
       {/* Left side: Premium Branding & Graphic */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-black flex-col justify-between p-12 border-r border-zinc-900 overflow-hidden">
         {/* Glow */}
-        <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
+        <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] rounded-full bg-orange-600/10 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-600/5 blur-[120px] pointer-events-none" />
         
         {/* Subtle grid pattern background */}
@@ -22,7 +22,7 @@ const AuthLayout = () => {
 
         {/* Top: Brand Header */}
         <div className="flex items-center space-x-3 z-10">
-          <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
+          <div className="w-9 h-9 rounded-xl bg-orange-600 flex items-center justify-center font-bold text-white shadow-lg shadow-orange-500/20">
             ES
           </div>
           <span className="text-xl font-bold tracking-wider text-white">
@@ -33,7 +33,7 @@ const AuthLayout = () => {
         {/* Center: Abstract Graphical Feature Card */}
         <div className="relative my-auto max-w-md z-10 space-y-6">
           <div className="space-y-3">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/10 border border-orange-500/20 text-orange-400">
               Enterprise Ready
             </span>
             <h1 className="text-4xl font-extrabold tracking-tight leading-tight text-white">
@@ -78,12 +78,12 @@ const AuthLayout = () => {
       {/* Right side: Auth Form Content */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 relative">
         {/* Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-orange-600/5 blur-[120px] pointer-events-none" />
         
         <div className="w-full max-w-md z-10 space-y-6">
           {/* Logo showing only on mobile */}
           <div className="flex lg:hidden items-center space-x-3 mb-8">
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white">
+            <div className="w-9 h-9 rounded-xl bg-orange-600 flex items-center justify-center font-bold text-white">
               ES
             </div>
             <span className="text-xl font-bold tracking-wider text-white">
@@ -99,3 +99,4 @@ const AuthLayout = () => {
 };
 
 export default AuthLayout;
+

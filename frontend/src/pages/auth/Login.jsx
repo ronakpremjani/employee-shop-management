@@ -106,12 +106,12 @@ const Login = () => {
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="w-4 h-4 rounded border-zinc-800 bg-zinc-950 text-blue-600 focus:ring-1 focus:ring-blue-500 focus:ring-offset-0 transition-all cursor-pointer"
+              className="w-4 h-4 rounded border-zinc-800 bg-zinc-950 text-orange-600 focus:ring-1 focus:ring-orange-500 focus:ring-offset-0 transition-all cursor-pointer"
             />
             <span className="text-xs text-zinc-400 font-medium hover:text-zinc-300">Remember me</span>
           </label>
 
-          <a href="#" className="text-xs text-zinc-400 hover:text-blue-400 font-medium transition-all" onClick={(e) => {
+          <a href="#" className="text-xs text-zinc-400 hover:text-orange-400 font-medium transition-all" onClick={(e) => {
             e.preventDefault();
             toast('Forgot password functionality is managed by the administrator.', { icon: '🔑' });
           }}>
@@ -123,7 +123,7 @@ const Login = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center py-2.5 px-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:pointer-events-none text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-900/20 text-sm tracking-wide mt-2 cursor-pointer"
+          className="w-full flex items-center justify-center py-2.5 px-4 bg-orange-600 hover:bg-orange-500 disabled:opacity-50 disabled:pointer-events-none text-white font-semibold rounded-xl transition-all shadow-lg shadow-orange-900/20 text-sm tracking-wide mt-2 cursor-pointer"
         >
           {loading ? <Spinner size="sm" className="mr-2" /> : null}
           Sign In
@@ -134,7 +134,7 @@ const Login = () => {
       <div className="pt-4 border-t border-zinc-900 text-center">
         <p className="text-xs text-zinc-400">
           Don't have an account?{' '}
-          <Link to="/register" className="text-blue-500 hover:text-blue-400 font-semibold transition-all">
+          <Link to="/register" className="text-orange-500 hover:text-orange-400 font-semibold transition-all">
             Create an account
           </Link>
         </p>
@@ -151,3 +151,4 @@ const Login = () => {
 };
 
 export default Login;
+

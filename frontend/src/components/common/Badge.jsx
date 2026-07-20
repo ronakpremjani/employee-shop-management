@@ -15,8 +15,8 @@ const Badge = ({ children, status = 'default', className = '' }) => {
     rejected: 'bg-rose-500/10 text-rose-400 border border-rose-500/20',
     failed: 'bg-rose-500/10 text-rose-400 border border-rose-500/20',
     
-    deducted: 'bg-blue-500/10 text-blue-400 border border-blue-500/20',
-    salary: 'bg-blue-500/10 text-blue-400 border border-blue-500/20',
+    deducted: 'bg-orange-500/10 text-orange-400 border border-orange-500/20',
+    salary: 'bg-orange-500/10 text-orange-400 border border-orange-500/20',
     
     default: 'bg-slate-500/10 text-slate-400 border border-slate-500/20',
   };
@@ -33,3 +33,4 @@ const Badge = ({ children, status = 'default', className = '' }) => {
 };
 
 export default Badge;
+

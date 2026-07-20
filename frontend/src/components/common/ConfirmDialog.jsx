@@ -36,7 +36,7 @@ const ConfirmDialog = ({
             className={`flex items-center justify-center px-3.5 py-2 text-xs font-semibold rounded-lg transition-all shadow-sm cursor-pointer ${
               isDanger
                 ? 'bg-rose-600 hover:bg-rose-500 text-white'
-                : 'bg-blue-600 hover:bg-blue-500 text-white'
+                : 'bg-orange-600 hover:bg-orange-500 text-white'
             } disabled:opacity-50`}
           >
             {isLoading ? <Spinner size="sm" className="mr-2" /> : null}
@@ -49,3 +49,4 @@ const ConfirmDialog = ({
 };
 
 export default ConfirmDialog;
+

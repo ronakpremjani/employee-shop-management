@@ -229,7 +229,7 @@ const Register = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center py-2.5 px-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:pointer-events-none text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-900/20 text-sm tracking-wide mt-3 cursor-pointer"
+          className="w-full flex items-center justify-center py-2.5 px-4 bg-orange-600 hover:bg-orange-500 disabled:opacity-50 disabled:pointer-events-none text-white font-semibold rounded-xl transition-all shadow-lg shadow-orange-900/20 text-sm tracking-wide mt-3 cursor-pointer"
         >
           {loading ? <Spinner size="sm" className="mr-2" /> : null}
           Register Account
@@ -240,7 +240,7 @@ const Register = () => {
       <div className="pt-4 border-t border-zinc-900 text-center">
         <p className="text-xs text-zinc-400">
           Already have an account?{' '}
-          <Link to="/login" className="text-blue-500 hover:text-blue-400 font-semibold transition-all">
+          <Link to="/login" className="text-orange-500 hover:text-orange-400 font-semibold transition-all">
             Sign In
           </Link>
         </p>
@@ -250,3 +250,4 @@ const Register = () => {
 };
 
 export default Register;
+

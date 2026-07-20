@@ -42,7 +42,7 @@ const Sidebar = ({ isOpen, onClose, role = 'staff', onLogout }) => {
       {/* Brand Header */}
       <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-900/60">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/10">
+          <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center font-bold text-white shadow-lg shadow-orange-500/10">
             ES
           </div>
           <span className="text-base font-bold tracking-tight text-white">
@@ -79,7 +79,7 @@ const Sidebar = ({ isOpen, onClose, role = 'staff', onLogout }) => {
               <>
                 <link.icon
                   className={`w-4 h-4 mr-3 transition-colors ${
-                    isActive ? 'text-blue-500' : 'text-zinc-500 group-hover:text-zinc-300'
+                    isActive ? 'text-orange-500' : 'text-zinc-500 group-hover:text-zinc-300'
                   }`}
                 />
                 {link.label}
@@ -125,3 +125,4 @@ const Sidebar = ({ isOpen, onClose, role = 'staff', onLogout }) => {
 };
 
 export default Sidebar;
+

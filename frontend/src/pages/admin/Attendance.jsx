@@ -90,7 +90,7 @@ const Attendance = () => {
       {selectedUserId ? (
         <div className="space-y-4">
           <div className="flex items-center space-x-2 text-white">
-            <UserCheck className="w-5 h-5 text-blue-500" />
+            <UserCheck className="w-5 h-5 text-orange-500" />
             <h3 className="text-lg font-bold">
               Attendance Logs for {staffList.find(s => s._id === selectedUserId)?.name}
             </h3>
@@ -114,3 +114,4 @@ const Attendance = () => {
 };
 
 export default Attendance;
+

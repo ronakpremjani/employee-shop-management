@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
         role = 'admin';
 }   
     else {
-        role = 'staff';
+        role = 'user';
 }
 
 const user = new User({
