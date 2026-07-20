@@ -37,12 +37,6 @@ const Landing = () => {
             >
               Sign In
             </Link>
-            <Link 
-              to="/register" 
-              className="px-5 py-2 text-sm font-bold text-black bg-white hover:bg-zinc-200 rounded-full transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-            >
-              Create Account
-            </Link>
           </div>
         </div>
       </header>
@@ -69,12 +63,6 @@ const Landing = () => {
             Explore Collection
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </a>
-          <Link 
-            to="/register" 
-            className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-full transition-all backdrop-blur-sm"
-          >
-            Become a Member
-          </Link>
         </div>
       </main>
 
